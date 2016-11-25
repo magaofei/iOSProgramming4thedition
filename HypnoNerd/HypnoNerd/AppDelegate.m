@@ -1,15 +1,14 @@
 //
 //  AppDelegate.m
-//  Hypnosister
+//  HypnoNerd
 //
-//  Created by MAMIAN on 2016/11/24.
+//  Created by MAMIAN on 2016/11/25.
 //  Copyright © 2016年 Mark MaMian. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "BNRHypnosisView.h"
-#import "ViewController.h"
-
+#import "BNRHypnosisViewController.h"
+#import "BNRReminderViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -20,57 +19,28 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//    CGRect firstFrame = self.window.bounds;
-//    CGRect firstFrame = CGRectMake(160, 240, 100, 150);
+    BNRHypnosisViewController *hvc = [[BNRHypnosisViewController alloc] init];
     
-//    BNRHypnosisView *firstView = [[BNRHypnosisView alloc] initWithFrame:firstFrame];
-//    firstView.backgroundColor = [UIColor redColor];
-//    [self.window addSubview:firstView];
-    
-    //创建两个CGRect结构分别作为UIScrollView对象和BNRHypnosisView对象的frame
-    CGRect screenRect = self.window.bounds;
-    CGRect bigRect = screenRect;
-    bigRect.size.width *= 2.0;
-//    bigRect.size.height *= 2.0;
-    
-    
-    
-    
-    
-    
-//    CGRect secondFrame = CGRectMake(20, 30, 50, 50);
-//    BNRHypnosisView *secondView = [[BNRHypnosisView alloc] initWithFrame:secondFrame];
-//    secondView.backgroundColor = [UIColor blueColor];
-////    [self.window addSubview:secondView];
-//    [firstView addSubview:secondView];
+//    // 获取指向NSBundle对象的指针，该NSBundle对象代表应用的主程序包
+//    NSBundle *appBundle = [NSBundle mainBundle];
+//    
+//    // 告诉初始化方法在appBundle中查找BNRReminderViewController.xib文件
+//    BNRReminderViewController *rvc = [[BNRReminderViewController alloc]
+//                                      initWithNibName:@"BNRReminderViewController"
+//                                      bundle:appBundle];
+    // 系统会自动寻找和ViewController同名的xib
+    BNRReminderViewController *rvc = [[BNRReminderViewController alloc] init];
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[hvc, rvc];
+    self.window.rootViewController = tabBarController;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    ViewController *vc =[[ViewController alloc] init];
-    self.window.rootViewController = vc;
-    
-    
-    //创建一个UIScrollView对象，将其尺寸设置为窗口大小
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:screenRect];
-    [vc.view addSubview:scrollView];
-    
-    // 创建一个大小和屏幕相同的BNRHypnosisView对象并将其加入scrollView
-    BNRHypnosisView *hypnosisView = [[BNRHypnosisView alloc] initWithFrame:screenRect];
-    [scrollView addSubview:hypnosisView];
-    
-    screenRect.origin.x += screenRect.size.width;
-    BNRHypnosisView *anotherView = [[BNRHypnosisView alloc] initWithFrame:screenRect];
-    [scrollView addSubview:anotherView];
-    // 告诉UIScrollView对象“取景”范围有多大
-    scrollView.contentSize = bigRect.size;
-    // 分页，根据bounds
-    [scrollView setPagingEnabled:YES];
-    
-//    self.window.rootViewController = [[ViewController alloc] init];
-    
     return YES;
 }
+
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
