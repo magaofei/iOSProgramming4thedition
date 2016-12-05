@@ -1,17 +1,15 @@
 //
 //  AppDelegate.m
-//  HypnoNerd
+//  Homepwner
 //
 //  Created by MAMIAN on 2016/11/25.
 //  Copyright © 2016年 Mark MaMian. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "BNRHypnosisViewController.h"
-#import "BNRReminderViewController.h"
-@interface AppDelegate () <UIScrollViewDelegate>
+#import "BNRItemsViewController.h"
 
-@property (nonatomic, strong) BNRHypnosisView *hypnosisView;
+@interface AppDelegate ()
 
 @end
 
@@ -21,40 +19,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    BNRHypnosisViewController *hvc = [[BNRHypnosisViewController alloc] init];
-    
-//    // 获取指向NSBundle对象的指针，该NSBundle对象代表应用的主程序包
-//    NSBundle *appBundle = [NSBundle mainBundle];
-//    
-//    // 告诉初始化方法在appBundle中查找BNRReminderViewController.xib文件
-//    BNRReminderViewController *rvc = [[BNRReminderViewController alloc]
-//                                      initWithNibName:@"BNRReminderViewController"
-//                                      bundle:appBundle];
-    // 系统会自动寻找和ViewController同名的xib
-    BNRReminderViewController *rvc = [[BNRReminderViewController alloc] init];
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[hvc, rvc];
-    self.window.rootViewController = tabBarController;
-    
+    BNRItemsViewController *itemsViewController = [[BNRItemsViewController alloc] init];
+    self.window.rootViewController = itemsViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
-//    UIScrollView *scrollView = [[UIScrollView alloc] init];
-//    scrollView.delegate = self;
-//    [scrollView addSubview:self.hypnosisView];
-//    scrollView.pagingEnabled = NO;
-//    scrollView.contentSize = [UIScreen mainScreen].bounds.size;
-//    [hvc.view addSubview:scrollView];
     return YES;
 }
-
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return self.hypnosisView;
-}
-
-
-
-
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
