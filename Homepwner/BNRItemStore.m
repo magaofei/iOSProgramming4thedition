@@ -27,12 +27,30 @@
     return shareStore;
 }
 
+- (void)removeItem:(BNRItem *)item {
+    [self.privateItems removeObjectIdenticalTo:item];
+}
+
 
 - (instancetype)init {
     @throw [NSException exceptionWithName:@"Singleton"
                                    reason:@"Use + [BNRItemStore sharedStore"
                                  userInfo:nil];
     return nil;
+}
+
+- (void)moveItemAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+    if (fromIndex == toIndex) {
+        return;
+    }
+    
+    // 得到要移动的对象的指针 以便稍后能将其插入新的位置
+    BNRItem *item = self.privateItems[fromIndex];
+    // 将item从allItems数组中移除
+    [self.privateItems removeObjectAtIndex:fromIndex];
+    
+    // 根据新的索引位置，将item插回allItems数组
+    [self.privateItems insertObject:item atIndex:toIndex];
 }
 
 - (instancetype)initPrivate {

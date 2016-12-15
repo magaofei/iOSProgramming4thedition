@@ -6,6 +6,10 @@
 //  Copyright © 2016年 Mark MaMian. All rights reserved.
 //
 
+/**
+ 这个函数的递归，最好画图来提示，
+
+ */
 #include <stdio.h>
 
 void singTheSong(int numberOfBottles) {
